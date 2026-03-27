@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-const bcrypt=req
+const bcrypt=require('bcrypt')
 
 const userSchema=new mongoose.Schema({
     email:{
@@ -27,21 +27,21 @@ const userSchema=new mongoose.Schema({
 })
 
 // before saving the data 
-userSchema.pre('save',async function (next) {
+userSchema.pre('save',async function () {
     
     if(!this.isModified("password")){
-        return next();
+        return ;
     }
     const hash=await bcrypt.hash(this.password,10);
     this.password=hash;
-    return next();
+    return;
 
 })
 
 // comaparing the password saved in database with current one
 
 userSchema.methods.comparePassword=async function(password){
-    return await bcrypt.compare(this.password,password);
+    return await bcrypt.compare(password,this.password);
 }
 
 const userModel=mongoose.model("user",userSchema);

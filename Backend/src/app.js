@@ -7,8 +7,14 @@ const transactionRoutes=require("./routes/transaction.routes")
 app.use(express.json());
 app.use(cookieParser());
 
+
+// just checking
+
+app.get('/',(req,res)=>{
+    res.send("Banking ledger is running now")
+})
 app.use('/api/auth',authRouter);
 app.use('/api/accounts',accountRouter);
-app.use("/api/trasactions",transactionRoutes)
+app.use("/api/transactions",transactionRoutes)
 
 module.exports=app;

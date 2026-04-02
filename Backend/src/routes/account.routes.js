@@ -11,7 +11,7 @@ router.post('/',authMiddleware,createAccountController);
 router.get("/",authMiddleware,getUserAccountController)
 
 
-// GET  account/balnace/account:id
+// GET  account/balance/account:id
 
 router.get('/balance/:accountId',authMiddleware,getAccountBalanceController)
 module.exports=router;

@@ -2,9 +2,16 @@ const express=require("express");
 
 const router=express.Router();
 const {authMiddleware}=require("../middleware/auth.middleware");
-const {createAccountController}=require("../controllers/account.controllers")
+const {createAccountController,getUserAccountController,getAccountBalanceController}=require("../controllers/account.controllers")
 
 router.post('/',authMiddleware,createAccountController);
 
 
+// get all user logged in account
+router.get("/",authMiddleware,getUserAccountController)
+
+
+// GET  account/balnace/account:id
+
+router.get('/balance/:accountId',authMiddleware,getAccountBalanceController)
 module.exports=router;
